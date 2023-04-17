@@ -9,7 +9,7 @@ class UsersController {
         const { name, email, password } = request.body
 
         const database = await sqliteConnection()
-        const checkUserExists = database.get('Select * from users where email = (?)', [email])
+        const checkUserExists = await database.get('Select * from users where email = (?)', [email])
         
         if(checkUserExists) {
             throw new AppError('Email já cadastrado.')
